@@ -1,22 +1,26 @@
 <template>
-  <v-container>
-    <v-layout row wrap >
-      <v-flex v-for="i in 3" :key="`4${i}`">
-        <v-card dark color="green" class="mb-2 mr-2">
-          <v-card-text>
-            {{dataValue}}
-          </v-card-text>
-        </v-card>
-        <v-spacer></v-spacer>
-        <v-card dark color="green" class="mb-2 mr-2">
-          <v-card-text>4</v-card-text>
-        </v-card>
-        <v-spacer></v-spacer>
-        <v-card dark color="green" class="mb-2 mr-2">
-          <v-card-text>4</v-card-text>
+  <v-container row wrap>
+    <v-layout>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card>
+          <v-img
+            :src="this.wholeResponse.Poster"
+            aspect-ratio="2.75"
+          ></v-img>
+
+          <v-card-title primary-title>
+            <div>
+              <h3 class="headline mb-0">{{this.wholeResponse.Title}}</h3>
+              <div>{{this.wholeResponse.Plot}}</div>
+            </div>
+          </v-card-title>
+          <v-card-actions>
+            <v-btn flat color="orange">Share</v-btn>
+            <v-btn flat color="orange">Explore</v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
-    </v-layout>
+  </v-layout>
   </v-container>
 </template>
 
@@ -25,24 +29,14 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      totalData: null
+      wholeResponse: []
     }
   },
 
   mounted () {
     axios
-      .get('http://www.omdbapi.com/?s=titan&apikey=b76b385c&page=1&type=movie&Content-Type=application/json')
-      .then(response => (this.totalData = response))
-  },
-
-  computed: {
-    dataValue () {
-      debugger
-      return this.totalData
-    }
-  },
-
-  methods: {
+      .get('http://www.omdbapi.com/?t=titanic&apikey=b76b385c&Content-Type=application/json')
+      .then(response => (this.wholeResponse = response.data))
   }
 }
 </script>
