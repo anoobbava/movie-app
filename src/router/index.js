@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 export default new VueRouter({
   routes: [
-   {
+    {
       path: '/',
       name: 'LatestMovie',
       component: LatestMovie

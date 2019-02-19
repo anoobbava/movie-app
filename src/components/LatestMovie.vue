@@ -4,7 +4,7 @@
       <v-flex v-for="i in 3" :key="`4${i}`">
         <v-card dark color="green" class="mb-2 mr-2">
           <v-card-text>
-            {{totalData}}
+            {{dataValue}}
           </v-card-text>
         </v-card>
         <v-spacer></v-spacer>
@@ -21,31 +21,30 @@
 </template>
 
 <script>
-  import axios from 'axios';
+import axios from 'axios'
+export default {
+  data () {
+    return {
+      totalData: null
+    }
+  },
 
-  export default {
-    data () {
-      return{
-        totalData: null
-      }
-    },
-
-    mounted () {
-      axios
+  mounted () {
+    axios
       .get('http://www.omdbapi.com/?s=titan&apikey=b76b385c&page=1&type=movie&Content-Type=application/json')
       .then(response => (this.totalData = response))
+  },
 
-    },
-
-    computed: {
-
-    },
-
-    methods: {
-      
+  computed: {
+    dataValue () {
+      debugger
+      return this.totalData
     }
+  },
+
+  methods: {
   }
-  
+}
 </script>
 
 <style>
