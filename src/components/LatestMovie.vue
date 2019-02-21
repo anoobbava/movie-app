@@ -11,11 +11,13 @@
     </div>
   </v-container>
 
-  <v-container v-else>
+  <v-container v-else grid-list-xl>
     <v-layout wrap>
-      <v-flex xs4 v-for="(item, index) in wholeResponse"
-              :key="index" mb-2>
-        <v-card mr-2>
+      <v-flex xs4
+        v-for="(item, index) in wholeResponse"
+        :key="index"
+        mb-2>
+        <v-card>
           <v-img
             :src="item.Poster"
             aspect-ratio="1"
@@ -29,10 +31,12 @@
               <div>IMDB-id: {{item.imdbID}}</div>
             </div>
           </v-card-title>
+
           <v-card-actions>
             <v-btn round color="green">View</v-btn>
             <v-btn round color="green">Visit site</v-btn>
           </v-card-actions>
+
         </v-card>
       </v-flex>
   </v-layout>
