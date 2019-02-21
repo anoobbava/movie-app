@@ -2,16 +2,19 @@
   <v-app>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
+        <router-link
+        to='/'
+        tag='span'
+        style='cursor: pointer'>
+        Movie Man
+        </router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
+        href="#"
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">Search</span>
       </v-btn>
     </v-toolbar>
 
