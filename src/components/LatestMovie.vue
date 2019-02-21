@@ -33,7 +33,10 @@
           </v-card-title>
 
           <v-card-actions>
-            <v-btn round color="green">View</v-btn>
+            <v-btn round
+              color="green"
+              @click="singleMovie(item.imdbID)"
+              >View</v-btn>
             <v-btn round color="green">Visit site</v-btn>
           </v-card-actions>
 
@@ -62,6 +65,11 @@ export default {
       .catch(error => {
         console.log(error)
       })
+  },
+  methods: {
+    singleMovie (id) {
+      this.$router.push('/movie/' + id)
+    }
   }
 }
 </script>
