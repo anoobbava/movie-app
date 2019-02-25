@@ -86,8 +86,7 @@
 </template>
 
 <script>
-import axios from 'axios'
-
+import movieApi from '@/services/MovieApi'
 export default {
   props: ['id'],
 
@@ -101,11 +100,9 @@ export default {
   },
 
   mounted () {
-    const url = 'http://www.omdbapi.com/?apikey=b76b385c&Content-Type=application/json' + '&i=' + this.id
-    axios
-      .get(url)
+    movieApi.fetchSingleMovie(this.id)
       .then(response => {
-        this.singleMovie = response.data
+        this.singleMovie = response
         this.ratings = this.singleMovie.Ratings
         this.loading = false
       })
