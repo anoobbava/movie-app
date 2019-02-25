@@ -10,6 +10,13 @@
       </v-progress-circular>
     </div>
   </v-container>
+
+  <v-container v-else-if="noData">
+    <div class="text-xs-center">
+    <h2>No Movie in API with {{this.name}}</h2>
+    </div>
+  </v-container>
+
   <v-container v-else grid-list-xl>
     <v-layout wrap>
       <v-flex xs4
@@ -53,7 +60,8 @@ export default {
   data () {
     return {
       movieResponse: [],
-      loading: true
+      loading: true,
+      noData: false
     }
   },
   methods: {
@@ -66,8 +74,14 @@ export default {
       axios
         .get(url)
         .then(response => {
-          this.movieResponse = response.data.Search
-          this.loading = false
+          if (response.data.Response === 'True') {
+            this.movieResponse = response.data.Search
+            this.loading = false
+            this.noData = false
+          } else {
+            this.noData = true
+            this.loading = false
+          }
         })
         .catch(error => {
           console.log(error)
