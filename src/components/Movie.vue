@@ -23,8 +23,8 @@
             <div>
               <h2 class="headline mb-0">{{singleMovie.Title}}-{{singleMovie.Year}}</h2>
               <p>{{ singleMovie.Plot}} </p>
-              <h3>Actors: {{singleMovie.Actors}}</h3>
-               <h4>Awards: {{singleMovie.Awards}}</h4>
+              <h3>Actors:</h3>{{singleMovie.Actors}}
+               <h4>Awards:</h4> {{singleMovie.Awards}}
                <p>Genre: {{singleMovie.Genre}}</p>
             </div>
           </v-card-title>
@@ -40,16 +40,13 @@
         <div class="text-xs-center">
         <v-dialog
           v-model="dialog"
-          width="500"
-        >
+          width="500">
           <v-btn
             slot="activator"
             color="green"
-            dark
-          >
+            dark>
             View Ratings
           </v-btn>
-
           <v-card>
             <v-card-title
               class="headline grey lighten-2"
@@ -57,15 +54,19 @@
             >
               Ratings
             </v-card-title>
-
             <v-card-text>
-              test
-              test
-              test
+              <table style="width:100%" border="1" >
+                <tr>
+                  <th>Source</th>
+                  <th>Ratings</th>
+                </tr>
+                <tr v-for="(rating,index) in this.ratings" :key="index">
+                  <td align="center">{{ratings[index].Source}}</td>
+                  <td align="center">{{ratings[index].Value}}</td>
+                </tr>
+              </table>
             </v-card-text>
-
             <v-divider></v-divider>
-
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
@@ -73,7 +74,7 @@
                 flat
                 @click="dialog = false"
               >
-                I accept
+                OK
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -94,7 +95,8 @@ export default {
     return {
       singleMovie: '',
       dialog: false,
-      loading: true
+      loading: true,
+      ratings: ''
     }
   },
 
@@ -104,6 +106,8 @@ export default {
       .get(url)
       .then(response => {
         this.singleMovie = response.data
+        this.ratings = this.singleMovie.Ratings
+        debugger
         this.loading = false
       })
       .catch(error => {
