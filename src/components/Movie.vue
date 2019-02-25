@@ -107,7 +107,6 @@ export default {
       .then(response => {
         this.singleMovie = response.data
         this.ratings = this.singleMovie.Ratings
-        debugger
         this.loading = false
       })
       .catch(error => {
