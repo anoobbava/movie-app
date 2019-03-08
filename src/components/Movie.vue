@@ -62,7 +62,7 @@
                 </tr>
                 <tr v-for="(rating,index) in this.ratings" :key="index">
                   <td align="center">{{ratings[index].Source}}</td>
-                  <td align="center">{{ratings[index].Value}}</td>
+                  <td align="center"><v-rating :half-increments="true" :value="ratings[index].Value"></v-rating></td>
                 </tr>
               </table>
             </v-card-text>
@@ -104,6 +104,11 @@ export default {
       .then(response => {
         this.singleMovie = response
         this.ratings = this.singleMovie.Ratings
+        this.ratings.forEach(function (element) {
+          element.Value = parseFloat(element.Value.split(/\/|%/)[0])
+          element.Value = element.Value <= 10 ? element.Value / 2 : element.Value / 20
+        }
+        )
         this.loading = false
       })
       .catch(error => {
